@@ -171,6 +171,7 @@ class _WhoToFollowWidgetState extends State<WhoToFollowWidget> {
   // }
 
   void refreshUsers() {
+    following.sink.add({});
     refreshClickController.sink.add('');
   }
 
