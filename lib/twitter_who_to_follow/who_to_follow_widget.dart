@@ -44,8 +44,6 @@ class _WhoToFollowWidgetState extends State<WhoToFollowWidget> {
 
   BehaviorSubject<Map<String, WhoToFollow>> following = BehaviorSubject.seeded({});
 
-  PublishSubject<String> publish = PublishSubject();
-
   @override
   void initState() {
     super.initState();
@@ -171,7 +169,6 @@ class _WhoToFollowWidgetState extends State<WhoToFollowWidget> {
   // }
 
   void refreshUsers() {
-    following.sink.add({});
     refreshClickController.sink.add('');
   }
 
