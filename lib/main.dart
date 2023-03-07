@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_reactive_programming/twitter_who_to_follow/who_to_follow_widget.dart';
+import 'package:flutter_reactive_programming/who_to_follow/who_to_follow_widget.dart';
 
 void main() {
   runApp(const MyApp());
