@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_reactive_programming/who_to_follow/who_to_follow_widget.dart';
+import 'package:flutter_reactive_programming/home/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const WhoToFollowWidget(),
+      home: const HomePage(),
     );
   }
 }

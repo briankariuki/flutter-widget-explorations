@@ -5,6 +5,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_programming/who_to_follow/who_to_follow_data.dart';
 import 'package:flutter_reactive_programming/util/image.dart';
+import 'package:flutter_reactive_programming/who_to_follow/widgets/custom_bottom_sheet.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
 import 'package:stream_transform/stream_transform.dart' show CombineLatest;
@@ -12,6 +13,7 @@ import 'package:stream_transform/stream_transform.dart' show CombineLatest;
 const primaryThemeColor = Color.fromRGBO(244, 101, 40, 1);
 
 class WhoToFollowWidget extends StatefulWidget {
+  static const String routeName = '/who-to-follow';
   const WhoToFollowWidget({super.key});
 
   @override
@@ -620,6 +622,17 @@ class _UserCardState extends State<UserCard> {
                             reset();
 
                             //Open bottom sheet
+
+                            // showModalBottomSheet(
+                            //   // isDismissible: true,
+                            //   isScrollControlled: true,
+
+                            //   context: context,
+                            //   backgroundColor: Colors.transparent,
+                            //   builder: (_) {
+                            //     return const CustomBottomSheet();
+                            //   },
+                            // );
                           },
                           icon: const Icon(
                             Icons.more_vert,
