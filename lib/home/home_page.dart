@@ -40,10 +40,11 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 32.0,
+              height: 40.0,
             ),
             Expanded(
               child: ListView.builder(
+                shrinkWrap: true,
                 itemCount: routes.length,
                 itemBuilder: (BuildContext context, int index) {
                   final route = routes[index];
