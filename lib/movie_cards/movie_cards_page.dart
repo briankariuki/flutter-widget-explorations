@@ -164,16 +164,23 @@ class _MovieCardsPageState extends State<MovieCardsPage> with SingleTickerProvid
                             AnimatedBuilder(
                               animation: scaleController!,
                               builder: (context, child) {
-                                return Transform.translate(
-                                  offset: Offset(
+                                return Opacity(
+                                  opacity: lerpDouble(
                                     0,
-                                    lerpDouble(
-                                      48,
+                                    1,
+                                    Curves.ease.transform(scaleController!.value),
+                                  )!,
+                                  child: Transform.translate(
+                                    offset: Offset(
                                       0,
-                                      Curves.ease.transform(scaleController!.value),
-                                    )!,
+                                      lerpDouble(
+                                        48,
+                                        0,
+                                        Curves.ease.transform(scaleController!.value),
+                                      )!,
+                                    ),
+                                    child: child,
                                   ),
-                                  child: child,
                                 );
                               },
                               child: Column(
