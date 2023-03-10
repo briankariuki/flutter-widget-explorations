@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_programming/movie_cards/movie_cards_page_view.dart';
@@ -15,7 +14,8 @@ class MovieCardsPage extends StatefulWidget {
   State<MovieCardsPage> createState() => _MovieCardsPageState();
 }
 
-class _MovieCardsPageState extends State<MovieCardsPage> {
+class _MovieCardsPageState extends State<MovieCardsPage> with SingleTickerProviderStateMixin {
+  AnimationController? scaleController;
   Movie? selectedMovie;
 
   List<Movie> _movies = [];
@@ -24,19 +24,37 @@ class _MovieCardsPageState extends State<MovieCardsPage> {
   void initState() {
     super.initState();
 
+    scaleController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
+    );
+
     _movies = movies.sublist(0, movies.length - 1);
 
     selectedMovie = _movies[2];
+
+    scaleController?.forward();
+  }
+
+  @override
+  void dispose() {
+    scaleController?.dispose();
+    super.dispose();
   }
 
   void onChangeSelectedMovie(Movie movie) {
     setState(() {
       selectedMovie = movie;
     });
+
+    scaleController?.reset();
+
+    scaleController?.forward();
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -46,11 +64,34 @@ class _MovieCardsPageState extends State<MovieCardsPage> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Transform.scale(
-              scale: 1.6,
+            child: AnimatedBuilder(
+              animation: scaleController!,
+              builder: (context, child) {
+                return Transform.scale(
+                  scale: lerpDouble(
+                    1.8,
+                    1.6,
+                    Curves.ease.transform(scaleController!.value),
+                  ),
+                  child: child,
+                );
+              },
               child: Image.asset(
                 selectedMovie!.image,
                 fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 24.0,
+                sigmaY: 24.0,
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.4),
+                ),
               ),
             ),
           ),
@@ -62,12 +103,12 @@ class _MovieCardsPageState extends State<MovieCardsPage> {
                   end: Alignment.bottomCenter,
                   stops: const [
                     0.1,
-                    0.5,
+                    0.4,
                     0.9,
                   ],
                   colors: [
                     Colors.black.withOpacity(0.1),
-                    Colors.black.withOpacity(0.3),
+                    Colors.black.withOpacity(0.4),
                     Colors.black.withOpacity(0.8),
                   ],
                 ),
@@ -75,60 +116,187 @@ class _MovieCardsPageState extends State<MovieCardsPage> {
             ),
           ),
           Positioned.fill(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 30.0,
-                sigmaY: 30.0,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SafeArea(
+                        child: MovieCardsPageView(
+                          movies: _movies,
+                          onChangeSelectedMovie: onChangeSelectedMovie,
+                        ),
+                      ),
+                      Align(
+                        child: Column(
+                          children: [
+                            AnimatedBuilder(
+                              animation: scaleController!,
+                              builder: (context, child) {
+                                return Transform.translate(
+                                  offset: Offset(
+                                    0,
+                                    lerpDouble(
+                                      30,
+                                      0,
+                                      Curves.ease.transform(scaleController!.value),
+                                    )!,
+                                  ),
+                                  child: child,
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  Text(
+                                    selectedMovie!.title,
+                                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            AnimatedBuilder(
+                              animation: scaleController!,
+                              builder: (context, child) {
+                                return Transform.translate(
+                                  offset: Offset(
+                                    0,
+                                    lerpDouble(
+                                      48,
+                                      0,
+                                      Curves.ease.transform(scaleController!.value),
+                                    )!,
+                                  ),
+                                  child: child,
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${selectedMovie!.category} · ${selectedMovie!.duration}",
+                                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                          color: Colors.white70,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                  ),
+                                  const SizedBox(
+                                    height: 16.0,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 8.0,
+                                      horizontal: 16.0,
+                                    ),
+                                    child: Text(
+                                      selectedMovie!.overview,
+                                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w400,
+                                            height: 1.61,
+                                          ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 0.0,
-            right: 0.0,
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 48.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    MovieCardsPageView(
-                      movies: _movies,
-                      onChangeSelectedMovie: onChangeSelectedMovie,
-                    ),
-                    const SizedBox(
-                      height: 24.0,
-                    ),
-                    Align(
-                      child: Column(
+                Container(
+                  color: Colors.black26,
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
                         children: [
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.3),
+                                    width: 4,
+                                  ),
+                                  borderRadius: BorderRadius.circular(60),
+                                ),
+                                height: 40.0,
+                                width: 40.0,
+                              ),
+                              SizedBox(
+                                height: 40.0 - 3,
+                                width: 40.0 - 3,
+                                child: AnimatedBuilder(
+                                    animation: scaleController!,
+                                    builder: (context, child) {
+                                      return CircularProgressIndicator(
+                                        value: lerpDouble(
+                                          0,
+                                          selectedMovie?.rating,
+                                          Curves.easeInOut.transform(scaleController!.value),
+                                        )!,
+                                        strokeWidth: 2.5,
+                                        color: Colors.white,
+                                      );
+                                    }),
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  '${(selectedMovie!.rating * 100).toInt()}%',
+                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 12.0,
+                          ),
                           Text(
-                            selectedMovie!.title,
-                            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            'User \nRating',
+                            style: Theme.of(context).textTheme.titleSmall!.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
-                          const SizedBox(
-                            height: 12.0,
-                          ),
-                          Text(
-                            selectedMovie!.category,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  color: Colors.white60,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                          ),
                         ],
                       ),
-                    ),
-                  ],
+                      ElevatedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.play_circle),
+                        label: const Text('Watch Now'),
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0.0,
+                          minimumSize: Size(size.width / 2, 48.0),
+                          shadowColor: Colors.transparent,
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
+                const SizedBox(
+                  height: 48.0,
+                )
+              ],
             ),
           )
         ],

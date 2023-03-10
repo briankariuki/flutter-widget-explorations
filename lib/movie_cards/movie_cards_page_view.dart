@@ -33,7 +33,7 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
   List<Movie> _movies = [];
 
   final curve = Curves.ease;
-  final duration = const Duration(milliseconds: 100);
+  final duration = const Duration(milliseconds: 600);
 
   @override
   void initState() {
@@ -57,21 +57,20 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
     //Check if pan right or pan left
     if (details.localPosition.dx <= dragPosition.dx) {
       dragDirection = DragDirection.left;
-      print('Dragging left');
     }
 
     if (details.localPosition.dx >= dragPosition.dx) {
       dragDirection = DragDirection.right;
-      print('Dragging right');
     }
-
-    // print(details.delta);
 
     var movedDistance = details.localPosition.dx - dragStartPosition.dx;
     var ratio = movedDistance.abs() / maxDragOffset;
     var factor = 1 / (ratio + 1);
 
-    var updatedOffset = Offset(mainCardDragOffset.dx + (details.delta.dx * factor), 0);
+    var updatedOffset = Offset(
+      mainCardDragOffset.dx + (details.delta.dx * Curves.ease.transform(factor)),
+      0,
+    );
 
     //update focused card position
 
@@ -84,22 +83,17 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
 
   //Handle Drag End
   void onDragEnd(DragEndDetails details) {
-    print("drag ended");
-
     final dragDistance = 0 - mainCardDragOffset.dx;
 
-    if (dragDistance.abs() <= maxDragOffset * 0.5) {
+    if (dragDistance.abs() <= maxDragOffset * 0.8) {
       setState(() {
         mainCardDragOffset = Offset.zero;
 
         isDragging = false;
-
-        //movieCards = [];
       });
     } else {
       final updatedMovies = updateArrangement(dragDirection, _movies);
 
-      print(updatedMovies.map((e) => e.title));
       setState(() {
         mainCardDragOffset = Offset.zero;
         isDragging = false;
@@ -148,8 +142,6 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
         Positioned.fill(
           child: LayoutBuilder(
             builder: (_, constraints) {
-              final height = constraints.maxHeight;
-
               List<Widget> _cards = [];
 
               List<Movie> moviesLeft = [];
@@ -170,12 +162,13 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
                 }
               }
 
-              print("Left ${moviesLeft.map((e) => e.title)}");
-              print("Right ${moviesRight.map((e) => e.title)}");
-              print("Center ${moviesCenter.map((e) => e.title)}");
+              //For debug
+              // print("Left ${moviesLeft.map((e) => e.title)}");
+              // print("Right ${moviesRight.map((e) => e.title)}");
+              // print("Center ${moviesCenter.map((e) => e.title)}");
 
               for (int i = 0; i < moviesLeft.length; i++) {
-                var left = i == 0 ? -32.0 : 20.0;
+                var left = i == 0 ? -32.0 : 24.0;
 
                 var scale = i == 0 ? 0.6 : 0.8;
 
@@ -185,7 +178,7 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
                   }
 
                   if (i == 1) {
-                    left = 20.0 + mainCardDragOffset.dx;
+                    left = 24.0 + mainCardDragOffset.dx;
 
                     scale = 0.8 + (-mainCardDragOffset.dx.abs() * 0.001);
                   }
@@ -208,9 +201,9 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
                           ),
                           Positioned.fill(
                             child: Opacity(
-                              opacity: 0.4,
+                              opacity: i == 0 ? 0.6 : 0.4,
                               child: Container(
-                                color: const Color.fromARGB(255, 98, 98, 98),
+                                color: const Color.fromARGB(255, 42, 42, 42),
                               ),
                             ),
                           )
@@ -224,7 +217,7 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
               }
 
               for (int i = 0; i < moviesRight.length; i++) {
-                var right = i == 0 ? -32.0 : 20.0;
+                var right = i == 0 ? -32.0 : 24.0;
                 var scale = i == 0 ? 0.6 : 0.8;
 
                 if (isDragging && dragDirection == DragDirection.right) {
@@ -233,7 +226,9 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
                   }
 
                   if (i == 1) {
-                    right = 20.0 - mainCardDragOffset.dx;
+                    right = 24.0 - mainCardDragOffset.dx;
+
+                    scale = 0.8 + (-mainCardDragOffset.dx.abs() * 0.001);
                   }
                 }
                 final _widget = AnimatedPositioned(
@@ -256,9 +251,9 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
                               ),
                               Positioned.fill(
                                 child: Opacity(
-                                  opacity: 0.4,
+                                  opacity: i == 0 ? 0.6 : 0.4,
                                   child: Container(
-                                    color: const Color.fromARGB(255, 98, 98, 98),
+                                    color: const Color.fromARGB(255, 42, 42, 42),
                                   ),
                                 ),
                               )
@@ -303,11 +298,11 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
                     child: Transform.translate(
                       offset: mainCardDragOffset,
                       child: AnimatedRotation(
-                        duration: duration,
+                        duration: const Duration(milliseconds: 800),
                         curve: curve,
                         turns: rotation,
                         child: AnimatedScale(
-                          duration: duration,
+                          duration: const Duration(milliseconds: 800),
                           curve: curve,
                           scale: scale,
                           child: Row(
@@ -315,26 +310,9 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(24.0),
-                                child: Stack(
-                                  children: [
-                                    Image.asset(
-                                      moviesCenter[i].image,
-                                      height: size.height / 2.5,
-                                    ),
-                                    Positioned.fill(
-                                      child: Opacity(
-                                        opacity: 0,
-                                        // opacity: i == 4
-                                        //     ? 0
-                                        //     : i % 2 == 0
-                                        //         ? 0.6
-                                        //         : 0.4,
-                                        child: Container(
-                                          color: const Color.fromARGB(255, 98, 98, 98),
-                                        ),
-                                      ),
-                                    )
-                                  ],
+                                child: Image.asset(
+                                  moviesCenter[i].image,
+                                  height: size.height / 2.5,
                                 ),
                               ),
                             ],
@@ -354,14 +332,7 @@ class _MovieCardsPageViewState extends State<MovieCardsPageView> {
           ),
         ),
         SizedBox(
-          height: size.height / 2.2,
-          // child: PageView.builder(
-          //   controller: pageController,
-          //   itemCount: 5,
-          //   itemBuilder: (_, index) {
-          //     return const SizedBox();
-          //   },
-          // ),
+          height: size.height / 2.5,
         ),
       ],
     );
