@@ -5,7 +5,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_programming/who_to_follow/who_to_follow_data.dart';
 import 'package:flutter_reactive_programming/util/image.dart';
-import 'package:flutter_reactive_programming/who_to_follow/widgets/custom_bottom_sheet.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
 import 'package:stream_transform/stream_transform.dart' show CombineLatest;
