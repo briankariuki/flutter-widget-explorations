@@ -104,12 +104,12 @@ class _MovieCardsPageState extends State<MovieCardsPage> with SingleTickerProvid
                   stops: const [
                     0.1,
                     0.4,
-                    0.9,
+                    0.8,
                   ],
                   colors: [
                     Colors.black.withOpacity(0.1),
                     Colors.black.withOpacity(0.4),
-                    Colors.black.withOpacity(0.8),
+                    Colors.black.withOpacity(0.7),
                   ],
                 ),
               ),
@@ -244,7 +244,7 @@ class _MovieCardsPageState extends State<MovieCardsPage> with SingleTickerProvid
                                         value: lerpDouble(
                                           0,
                                           selectedMovie?.rating,
-                                          Curves.easeInOut.transform(scaleController!.value),
+                                          Curves.ease.transform(scaleController!.value),
                                         )!,
                                         strokeWidth: 2.5,
                                         color: Colors.white,
@@ -294,7 +294,7 @@ class _MovieCardsPageState extends State<MovieCardsPage> with SingleTickerProvid
                   ),
                 ),
                 const SizedBox(
-                  height: 48.0,
+                  height: 56.0,
                 )
               ],
             ),
