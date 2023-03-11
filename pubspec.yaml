@@ -16,6 +16,7 @@ dependencies:
   rxdart: ^0.27.7
   http: ^0.13.5
   stream_transform: ^2.1.0
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

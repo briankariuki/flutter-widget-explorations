@@ -3,7 +3,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_reactive_programming/books_scroll/books_scroll_data.dart';
 import 'package:flutter_reactive_programming/util/image.dart';
+import 'package:intl/intl.dart';
 
 class BooksScrollPage extends StatefulWidget {
   static const String routeName = '/books-scroll';
@@ -15,7 +17,7 @@ class BooksScrollPage extends StatefulWidget {
 }
 
 class _BooksScrollPageState extends State<BooksScrollPage> {
-  List<dynamic> books = [];
+  List<Book> _books = [];
 
   PageController pageController = PageController();
 
@@ -28,10 +30,7 @@ class _BooksScrollPageState extends State<BooksScrollPage> {
   void initState() {
     super.initState();
 
-    books = List.generate(
-      15,
-      (index) => Container(),
-    );
+    _books = books;
 
     currentPage = 0;
 
@@ -55,8 +54,6 @@ class _BooksScrollPageState extends State<BooksScrollPage> {
     currentPage = pageController.page!.floor();
     pagePercent = (pageController.page! - currentPage).abs();
 
-    // print(currentPage);
-    // print(pagePercent);
     setState(() {});
   }
 
@@ -81,12 +78,27 @@ class _BooksScrollPageState extends State<BooksScrollPage> {
               horizontal: 24.0,
               vertical: 8.0,
             ),
-            child: Text(
-              'Books',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
-                  ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Browse',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                ),
+                const SizedBox(
+                  height: 8.0,
+                ),
+                Text(
+                  'Recommended books for you',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
+              ],
             ),
           ),
           const SizedBox(
@@ -94,30 +106,45 @@ class _BooksScrollPageState extends State<BooksScrollPage> {
           ),
           Expanded(
             child: Container(
-              color: Colors.red[100],
-              child: PageView.builder(
-                pageSnapping: false,
-                padEnds: false,
-                controller: pageController,
-                scrollDirection: Axis.vertical,
-                itemCount: books.length,
-                itemBuilder: (_, index) {
-                  return index == currentPage
-                      ? Transform(
-                          alignment: Alignment.center,
-                          transform: Matrix4.identity()
-                            ..setEntry(
-                              3,
-                              2,
-                              -0.001,
-                            )
-                            ..scale(lerpDouble(1.0, 0.8, (pagePercent / 2))!)
-                            ..rotateX(lerpDouble(0, pi / 2, (pagePercent * 2))!)
-                            ..translate(0.0, lerpDouble(0, (itemSize + 24) * 1.8, (pagePercent))!),
-                          child: const BookPanel(),
-                        )
-                      : const BookPanel();
+              color: Colors.black.withOpacity(0.04),
+              child: NotificationListener<ScrollNotification>(
+                onNotification: (notification) {
+                  if (notification.metrics.pixels == notification.metrics.maxScrollExtent) {
+                    setState(() {
+                      pagePercent = 0.0;
+                    });
+                  }
+                  return false;
                 },
+                child: PageView.builder(
+                  pageSnapping: false,
+                  padEnds: false,
+                  controller: pageController,
+                  scrollDirection: Axis.vertical,
+                  itemCount: _books.length,
+                  itemBuilder: (_, index) {
+                    final book = _books[index];
+                    return index == currentPage
+                        ? Transform(
+                            alignment: Alignment.center,
+                            transform: Matrix4.identity()
+                              ..setEntry(
+                                3,
+                                2,
+                                -0.001,
+                              )
+                              ..scale(lerpDouble(1.0, 0.4, (pagePercent / 3))!)
+                              ..rotateX(lerpDouble(0, pi / 2, (pagePercent * 1.5))!)
+                              ..translate(0.0, lerpDouble(0, (itemSize + 24) * 1.5, (pagePercent))!),
+                            child: BookPanel(
+                              book: book,
+                            ),
+                          )
+                        : BookPanel(
+                            book: book,
+                          );
+                  },
+                ),
               ),
             ),
           ),
@@ -128,13 +155,18 @@ class _BooksScrollPageState extends State<BooksScrollPage> {
 }
 
 class BookPanel extends StatelessWidget {
-  const BookPanel({super.key});
+  final Book book;
+  const BookPanel({
+    super.key,
+    required this.book,
+  });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Container(
+      height: 72.0,
       padding: const EdgeInsets.only(bottom: 12.0, top: 12.0),
       child: Stack(
         children: [
@@ -142,17 +174,24 @@ class BookPanel extends StatelessWidget {
             right: 28.0,
             top: 0.0,
             bottom: 0.0,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                color: Colors.red,
-              ),
-              width: size.width / 2.3,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: const NewtworkImageWrapper(
-                  imageUrl: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1529358577i/39939417.jpg',
-                  fit: BoxFit.cover,
+            child: PhysicalModel(
+              clipBehavior: Clip.antiAlias,
+              borderRadius: BorderRadius.circular(12.0),
+              elevation: 16.0,
+              color: Colors.transparent,
+              shadowColor: Colors.black.withOpacity(0.8),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.0),
+                  color: Colors.black38,
+                ),
+                width: size.width / 2.2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: NewtworkImageWrapper(
+                    imageUrl: book.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -162,9 +201,11 @@ class BookPanel extends StatelessWidget {
             bottom: 16.0,
             left: 24.0,
             child: PhysicalModel(
+              clipBehavior: Clip.antiAlias,
               borderRadius: BorderRadius.circular(12.0),
-              elevation: 20.0,
-              color: Colors.black.withOpacity(0.3),
+              elevation: 16.0,
+              color: Colors.transparent,
+              shadowColor: Colors.black.withOpacity(0.8),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
@@ -177,28 +218,36 @@ class BookPanel extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 24.0,
+                          horizontal: 20.0,
                           vertical: 16.0,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Five Feet Apart',
+                              book.title,
+                              maxLines: 2,
                               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w700,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                             ),
                             const SizedBox(
                               height: 4.0,
                             ),
                             Text(
-                              'By Rachel',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              'By ${book.author}',
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: Colors.black54,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                   ),
+                            ),
+                            const SizedBox(
+                              height: 8.0,
+                            ),
+                            UserRating(
+                              rating: book.rating,
                             ),
                           ],
                         ),
@@ -212,7 +261,7 @@ class BookPanel extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            '2,781',
+                            NumberFormat.compact().format(book.views),
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.w700,
@@ -243,6 +292,35 @@ class BookPanel extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class UserRating extends StatelessWidget {
+  final double rating;
+  const UserRating({super.key, required this.rating});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 16.0,
+      child: ListView.builder(
+        padding: EdgeInsets.zero,
+        physics: const NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 4.0),
+            child: Icon(
+              Icons.star,
+              color: index + 1 <= rating.floor() ? Colors.yellow : Colors.black26,
+              size: 16.0,
+            ),
+          );
+        },
       ),
     );
   }
