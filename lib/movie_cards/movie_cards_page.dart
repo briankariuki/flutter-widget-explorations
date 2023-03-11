@@ -174,7 +174,7 @@ class _MovieCardsPageState extends State<MovieCardsPage> with SingleTickerProvid
                                     offset: Offset(
                                       0,
                                       lerpDouble(
-                                        48,
+                                        56,
                                         0,
                                         Curves.ease.transform(scaleController!.value),
                                       )!,

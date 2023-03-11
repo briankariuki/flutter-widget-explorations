@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_reactive_programming/books_scroll/books_scroll_page.dart';
 import 'package:flutter_reactive_programming/movie_cards/movie_cards_page.dart';
 import 'package:flutter_reactive_programming/who_to_follow/who_to_follow_widget.dart';
 
@@ -12,6 +13,11 @@ final routes = <PageRoute>[
     routeName: MovieCardsPage.routeName,
     title: 'Movie Cards',
     widget: const MovieCardsPage(),
+  ),
+  PageRoute(
+    routeName: BooksScrollPage.routeName,
+    title: 'Books Scroll',
+    widget: const BooksScrollPage(),
   ),
 ];
 
