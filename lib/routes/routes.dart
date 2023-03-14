@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_programming/books_scroll/books_scroll_page.dart';
 import 'package:flutter_reactive_programming/dynamic_tab_indicator/dynamic_tab_indicator_page.dart';
+import 'package:flutter_reactive_programming/fancy_fab/fancy_fab_page.dart';
 import 'package:flutter_reactive_programming/movie_cards/movie_cards_page.dart';
 import 'package:flutter_reactive_programming/who_to_follow/who_to_follow_widget.dart';
 
@@ -24,6 +25,11 @@ final routes = <PageRoute>[
     routeName: DynamicTabIndicatorPage.routeName,
     title: 'Dynamic Tab Indicator',
     widget: const DynamicTabIndicatorPage(),
+  ),
+  PageRoute(
+    routeName: FancyFabPage.routeName,
+    title: 'Fancy Animated Fab',
+    widget: const FancyFabPage(),
   ),
 ];
 
