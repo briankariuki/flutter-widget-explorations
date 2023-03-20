@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_reactive_programming/core/widgets/custom_scroll_behavior.dart';
 import 'package:flutter_reactive_programming/core/widgets/widgets.dart';
 import 'package:flutter_reactive_programming/open_card/widgets/card_content_widget.dart';
 import 'package:flutter_reactive_programming/util/image.dart';
@@ -41,7 +40,7 @@ class _OpenCardPageState extends State<OpenCardPage> with SingleTickerProviderSt
   double scrollPosition = 0.0;
 
   final animationCurve = const Cubic(0.6, 0.05, -0.01, 0.9);
-  final animationDuration = const Duration(milliseconds: 600);
+  final animationDuration = const Duration(milliseconds: 450);
 
   ///static const Cubic easeCurve = Cubic(0.6, 0.05, -0.01, 0.9);
 

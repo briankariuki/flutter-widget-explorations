@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_reactive_programming/apple_bubble_ui/apple_bubble_ui_page.dart';
 import 'package:flutter_reactive_programming/books_scroll/books_scroll_page.dart';
 import 'package:flutter_reactive_programming/dynamic_tab_indicator/dynamic_tab_indicator_page.dart';
 import 'package:flutter_reactive_programming/fancy_fab/fancy_fab_page.dart';
@@ -36,6 +37,11 @@ final routes = <PageRoute>[
     routeName: OpenCardPage.routeName,
     title: 'Open Card',
     widget: const OpenCardPage(),
+  ),
+  PageRoute(
+    routeName: AppleBubbleUIPage.routeName,
+    title: 'Apple Watch Bubble UI',
+    widget: const AppleBubbleUIPage(),
   ),
 ];
 
