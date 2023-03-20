@@ -111,33 +111,6 @@ class _AppleBubbleUIPageState extends State<AppleBubbleUIPage> {
                 size: Size.infinite,
               ),
             ),
-
-            // //Center region
-            // Positioned(
-            //   top: (size.height - (yRadius * 2) - gutterWidth) / 2,
-            //   bottom: (size.height - (yRadius * 2) - gutterWidth) / 2,
-            //   left: (size.width - (xRadius * 2) - gutterWidth) / 2,
-            //   right: (size.width - (xRadius * 2) - gutterWidth) / 2,
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(cornerRadius),
-            //       color: Colors.white.withOpacity(0.3),
-            //     ),
-            //   ),
-            // ),
-
-            // Positioned(
-            //   top: (size.height - (yRadius * 2)) / 2,
-            //   bottom: (size.height - (yRadius * 2)) / 2,
-            //   left: (size.width - (xRadius * 2)) / 2,
-            //   right: (size.width - (xRadius * 2)) / 2,
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(cornerRadius),
-            //       color: Colors.white.withOpacity(0.4),
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),
@@ -357,14 +330,6 @@ class BubblesPainter extends CustomPainter {
     //Check if is in fringe region
     bool isInFringeZone = fringeZone.contains(bubblePosition);
 
-    // bool isInCornerZone1 = bubblePosition.dx.abs() < (canvasCenter.dx - xRadius + cornerRadius) && bubblePosition.dy < canvasCenter.dy - yRadius + cornerRadius;
-
-    // bool isInCornerZone2 = bubblePosition.dx.abs() > (canvasCenter.dx + xRadius - cornerRadius) && bubblePosition.dy < canvasCenter.dy - yRadius + cornerRadius;
-
-    // bool isInCornerZone3 = bubblePosition.dx.abs() < (canvasCenter.dx - xRadius + cornerRadius) && bubblePosition.dy > canvasCenter.dy + yRadius - cornerRadius;
-
-    // bool isInCornerZone4 = bubblePosition.dx.abs() > (canvasCenter.dx + xRadius - cornerRadius) && bubblePosition.dy > canvasCenter.dy + yRadius - cornerRadius;
-
     bool isInCornerZone1 = cornerZone1.contains(bubblePosition);
 
     bool isInCornerZone2 = cornerZone2.contains(bubblePosition);
@@ -374,18 +339,6 @@ class BubblesPainter extends CustomPainter {
     bool isInCornerZone4 = cornerZone4.contains(bubblePosition);
 
     if (isInCornerZone1 || isInCornerZone2 || isInCornerZone3 || isInCornerZone4) {
-      // final distanceToCorner = getDistanceToPoint(
-      //   bubblePosition,
-      //   Offset(
-      //     canvasCenter.dx - xRadius + cornerRadius,
-      //     canvasCenter.dy - yRadius + cornerRadius,
-      //   ),
-      // );
-
-      // if (distanceToCorner < (gutterWidth - cornerRadius)) {
-      //   return 16.0;
-      // }
-
       if (isInFringeZone) {
         final innerPointPosition = isInCornerZone1
             ? Offset(cornerZone1.right, cornerZone1.bottom)
