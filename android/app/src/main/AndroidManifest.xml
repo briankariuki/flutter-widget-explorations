@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flutter_reactive_programming">
    <application
-        android:label="flutter_reactive_programming"
+        android:label="widget_explorations"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
