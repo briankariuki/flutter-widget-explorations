@@ -103,19 +103,30 @@ class _SurfsharkPageState extends State<SurfsharkPage> with TickerProviderStateM
           backgroundColor: Colors.transparent,
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               flex: 3,
-              child: Container(
-                color: tealBlue,
-                child: CustomPaint(
-                  isComplex: true,
-                  willChange: true,
-                  painter: AnimatingCircles(
-                    ringAnimations: ringAnimations,
+              child: Stack(
+                children: [
+                  Container(
+                    color: tealBlue,
+                    child: CustomPaint(
+                      willChange: true,
+                      painter: AnimatingCircles(
+                        ringAnimations: ringAnimations,
+                      ),
+                      size: Size.infinite,
+                    ),
                   ),
-                  size: Size.infinite,
-                ),
+                  const Center(
+                    child: Icon(
+                      Icons.security,
+                      color: tealBlue,
+                      size: 80.0,
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(
@@ -132,14 +143,15 @@ class _SurfsharkPageState extends State<SurfsharkPage> with TickerProviderStateM
                     ),
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(
-                        height: 24.0,
+                        height: 16.0,
                       ),
                       Expanded(
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 24.0,
+                            horizontal: 20.0,
                           ),
                           child: Column(
                             children: [
@@ -192,8 +204,8 @@ class _SurfsharkPageState extends State<SurfsharkPage> with TickerProviderStateM
                                     Positioned(
                                       left: 8.0,
                                       right: 8.0,
-                                      top: 24.0,
-                                      height: 24.0,
+                                      top: 16.0,
+                                      height: 40.0,
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                         decoration: BoxDecoration(
@@ -245,8 +257,7 @@ class _SurfsharkPageState extends State<SurfsharkPage> with TickerProviderStateM
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 24.0,
-                          vertical: 8.0,
+                          horizontal: 20.0,
                         ),
                         child: Row(
                           children: [
@@ -378,7 +389,7 @@ class AnimatingCircles extends CustomPainter {
   AnimatingCircles({
     required this.ringAnimations,
   }) : super(
-          repaint: Listenable.merge(ringAnimations),
+          repaint: Listenable.merge([...ringAnimations]),
         );
 
   @override
@@ -402,7 +413,7 @@ class AnimatingCircles extends CustomPainter {
 
       radius = lerpDouble(
         radius,
-        radius * 1.08,
+        radius * 1.1,
         Curves.fastOutSlowIn.transform(ringAnimations[i].value),
       )!;
 
@@ -412,7 +423,7 @@ class AnimatingCircles extends CustomPainter {
         Paint()
           ..style = PaintingStyle.fill
           ..color = Colors.black.withOpacity(
-            0.3 - (0.050 * i),
+            0.3 - (0.050 * i).clamp(0.0, 0.3),
           ),
       );
     }
@@ -420,7 +431,7 @@ class AnimatingCircles extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+    return false;
   }
 }
 
