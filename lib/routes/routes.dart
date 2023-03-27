@@ -5,6 +5,7 @@ import 'package:flutter_reactive_programming/dynamic_tab_indicator/dynamic_tab_i
 import 'package:flutter_reactive_programming/fancy_fab/fancy_fab_page.dart';
 import 'package:flutter_reactive_programming/movie_cards/movie_cards_page.dart';
 import 'package:flutter_reactive_programming/open_card/open_card_page.dart';
+import 'package:flutter_reactive_programming/surfshark/surfshark_page.dart';
 import 'package:flutter_reactive_programming/who_to_follow/who_to_follow_widget.dart';
 
 final routes = <PageRoute>[
@@ -42,6 +43,11 @@ final routes = <PageRoute>[
     routeName: AppleBubbleUIPage.routeName,
     title: 'Apple Watch Bubble UI',
     widget: const AppleBubbleUIPage(),
+  ),
+  PageRoute(
+    routeName: SurfsharkPage.routeName,
+    title: 'Surfshark',
+    widget: const SurfsharkPage(),
   ),
 ];
 
