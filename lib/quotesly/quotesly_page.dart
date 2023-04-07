@@ -124,8 +124,8 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                           index: snapshot.data ?? 0,
                           children: [
                             AnimatedScale(
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.fastOutSlowIn,
+                              duration: const Duration(milliseconds: 150),
+                              curve: Curves.easeIn,
                               scale: snapshot.data == 0 ? 1.0 : 0.95,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -192,8 +192,8 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                               ),
                             ),
                             AnimatedScale(
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.fastOutSlowIn,
+                              duration: const Duration(milliseconds: 150),
+                              curve: Curves.easeIn,
                               scale: snapshot.data == 1 ? 1.0 : 0.95,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -210,7 +210,7 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                                               color: Colors.white,
                                             ),
                                             BodyMedium(
-                                              title: "Bookmarked Quotes",
+                                              title: "My Bookmarked Quotes",
                                               color: Colors.white,
                                               fontWeight: FontWeight.w400,
                                             ),
@@ -224,7 +224,7 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                                     child: StreamBuilder(
                                       stream: quoteslyController.bookmarkedQuotes$,
                                       builder: (context, snapshot) {
-                                        return snapshot.hasData == true
+                                        return snapshot.hasData == true && snapshot.data!.isNotEmpty
                                             ? ListView.builder(
                                                 shrinkWrap: true,
                                                 scrollDirection: Axis.vertical,
@@ -241,7 +241,7 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                                               )
                                             : const Center(
                                                 child: BodyMedium(
-                                                  title: "Something went wrong",
+                                                  title: "No bookmarks found.",
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.w400,
                                                 ),
