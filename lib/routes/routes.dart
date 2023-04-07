@@ -51,12 +51,12 @@ final routes = <PageRoute>[
     title: 'Surfshark',
     widget: const SurfsharkPage(),
   ),
-  PageRoute(
-    routeName: FaceDetectionPage.routeName,
-    title: 'FaceDetection',
-    widget: const FaceDetectionPage(),
-    isUnfinished: true,
-  ),
+  // PageRoute(
+  //   routeName: FaceDetectionPage.routeName,
+  //   title: 'FaceDetection',
+  //   widget: const FaceDetectionPage(),
+  //   isUnfinished: true,
+  // ),
   PageRoute(
     routeName: QuoteslyPage.routeName,
     title: 'Quotesly',
