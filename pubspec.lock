@@ -326,14 +326,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
-  flutter_face_api:
-    dependency: "direct main"
-    description:
-      name: flutter_face_api
-      sha256: "0e321a60f21b9978d18133a3efd0e9fbcc0fd52bc024905cc2ec7bf9a361562a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.1.3"
   flutter_lints:
     dependency: "direct dev"
     description:
