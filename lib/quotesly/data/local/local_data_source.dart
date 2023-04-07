@@ -3,7 +3,7 @@ import 'dart:async';
 import '../../models/models.dart';
 
 abstract class LocalDataSource {
-  /// Returns a single-subscription stream that emits [Quote] or null
+  /// Returns a subscription stream that emits [Quote] or null
   Stream<List<Quote>?> get quotes$;
 
   /// Returns a future that completes [Quote] or null

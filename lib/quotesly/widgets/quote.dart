@@ -36,7 +36,7 @@ class _QuoteCardWidgetState extends State<QuoteCardWidget> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16.0),
-      padding: const EdgeInsets.symmetric(vertical: 24.0),
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24.0),
         color: color,
@@ -64,6 +64,7 @@ class _QuoteCardWidgetState extends State<QuoteCardWidget> {
                       title: widget.quote.content!,
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
+                      lineHeight: 1.4,
                     ),
                   ),
                   const SizedBox(height: 16.0),
@@ -92,14 +93,17 @@ class _QuoteCardWidgetState extends State<QuoteCardWidget> {
                     ),
                   ),
                   const SizedBox(width: 2.0),
-                  IconButton(
-                    splashRadius: 20.0,
-                    onPressed: () => widget.onShare(widget.quote),
-                    icon: const Icon(
-                      Icons.share,
-                      color: Colors.white,
-                    ),
-                  )
+
+                  //ToDO implement share
+
+                  // IconButton(
+                  //   splashRadius: 20.0,
+                  //   onPressed: () => widget.onShare(widget.quote),
+                  //   icon: const Icon(
+                  //     Icons.share,
+                  //     color: Colors.white,
+                  //   ),
+                  // )
                 ],
               ),
             )

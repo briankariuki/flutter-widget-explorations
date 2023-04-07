@@ -82,7 +82,7 @@ class QuotesRepositoryImpl implements QuotesRepository {
     String? authorId,
   }) {
     Map<String, dynamic> query = {
-      'limit': 10,
+      'limit': limit,
     };
     return _quotesApi.randomQuotes(query).asStream().toEitherStream(
           Mappers.errorToAppError,

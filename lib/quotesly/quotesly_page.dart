@@ -176,7 +176,13 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                                                             );
                                                           },
                                                         )
-                                                      : Container();
+                                                      : const Center(
+                                                          child: BodyMedium(
+                                                            title: "Something went wrong",
+                                                            color: Colors.white,
+                                                            fontWeight: FontWeight.w400,
+                                                          ),
+                                                        );
                                                 },
                                               );
                                       },
@@ -233,7 +239,13 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                                                   );
                                                 },
                                               )
-                                            : Container();
+                                            : const Center(
+                                                child: BodyMedium(
+                                                  title: "Something went wrong",
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              );
                                       },
                                     ),
                                   )
