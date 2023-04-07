@@ -36,8 +36,17 @@ class SharedPrefs implements LocalDataSource {
             ) ??
         [];
 
+    var _quote = Quote()
+      ..bookmarked = true
+      ..author = quote.author
+      ..content = quote.content
+      ..id = quote.id
+      ..authorSlug = quote.authorSlug
+      ..tags = quote.tags
+      ..length = quote.length;
+
     _quotes = [
-      quote.toString(),
+      _quote.toString(),
       ..._quotes,
     ];
 
