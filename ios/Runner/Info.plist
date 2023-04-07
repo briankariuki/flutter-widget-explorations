@@ -47,5 +47,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access to take face photo</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone access to camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To access your photos in your Library</string>
 </dict>
 </plist>

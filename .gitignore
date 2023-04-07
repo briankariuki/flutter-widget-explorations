@@ -47,3 +47,5 @@ app.*.map.json
 
 /lib/movie_cards/movie_cards_now.dart
 /lib/movie_cards/movie_cards_prev.dart
+
+/lib/face_detection

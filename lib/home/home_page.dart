@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_programming/assets.dart';
 import 'package:flutter_reactive_programming/core/widgets/widgets.dart';
@@ -61,29 +62,30 @@ class HomePage extends StatelessWidget {
                               thickness: 0.8,
                               color: Colors.white.withOpacity(0.16),
                             ),
-                          ListTile(
-                            onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute<void>(
-                                builder: (BuildContext context) => route.widget,
+                          if ((kDebugMode && !route.isUnfinished) || (kReleaseMode && route.isUnfinished))
+                            ListTile(
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) => route.widget,
+                                ),
+                              ),
+                              leading: Text(
+                                "#${index + 1}",
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white),
+                              ),
+                              title: Text(
+                                route.title,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      color: Colors.white,
+                                      height: 1.0,
+                                    ),
+                              ),
+                              trailing: const Icon(
+                                size: 20.0,
+                                Icons.open_in_new,
+                                color: Colors.white60,
                               ),
                             ),
-                            leading: Text(
-                              "#${index + 1}",
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white),
-                            ),
-                            title: Text(
-                              route.title,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: Colors.white,
-                                    height: 1.0,
-                                  ),
-                            ),
-                            trailing: const Icon(
-                              size: 20.0,
-                              Icons.open_in_new,
-                              color: Colors.white60,
-                            ),
-                          ),
                           Divider(
                             height: 1.0,
                             thickness: 0.8,
