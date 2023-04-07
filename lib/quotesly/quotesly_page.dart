@@ -43,7 +43,7 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
 
     quoteslyController = QuoteslyController(QuotesUseCase(quotesRepository));
 
-    Future.delayed(const Duration(milliseconds: 50), () {
+    Future.delayed(const Duration(milliseconds: 2), () {
       quoteslyController.fetchQuotes();
     });
 
