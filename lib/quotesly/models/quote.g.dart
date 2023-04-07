@@ -12,7 +12,8 @@ Quote _$QuoteFromJson(Map<String, dynamic> json) => Quote()
   ..author = json['author'] as String?
   ..authorSlug = json['authorSlug'] as String?
   ..length = json['length'] as int?
-  ..tags = (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList();
+  ..tags = (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..bookmarked = json['bookmarked'] as bool? ?? false;
 
 Map<String, dynamic> _$QuoteToJson(Quote instance) => <String, dynamic>{
       '_id': instance.id,
@@ -21,4 +22,5 @@ Map<String, dynamic> _$QuoteToJson(Quote instance) => <String, dynamic>{
       'authorSlug': instance.authorSlug,
       'length': instance.length,
       'tags': instance.tags,
+      'bookmarked': instance.bookmarked,
     };

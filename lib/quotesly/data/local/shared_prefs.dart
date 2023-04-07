@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:rx_shared_preferences/rx_shared_preferences.dart';
@@ -35,9 +36,12 @@ class SharedPrefs implements LocalDataSource {
             ) ??
         [];
 
-    _quotes = [..._quotes, quote.toString()];
+    _quotes = [
+      quote.toString(),
+      ..._quotes,
+    ];
 
-    return _prefs
+    _prefs
         .setStringList(
           kQuotes,
           _quotes,
@@ -66,7 +70,7 @@ class SharedPrefs implements LocalDataSource {
 
     _quotes.removeWhere((e) => e == quote.toString());
 
-    return _prefs
+    _prefs
         .setStringList(
           kQuotes,
           _quotes,
@@ -84,17 +88,11 @@ class SharedPrefs implements LocalDataSource {
   Future<List<Quote>?> get quotes => _prefs
       .read<List<Quote>>(
         kQuotes,
-        (dynamic value) => value == null
-            ? value
-            : (value as List<dynamic>)
-                .map((e) => Quote.fromJson(
-                      jsonDecode(e),
-                    ))
-                .toList(),
+        _toListQuote,
       )
       .onError(
         (error, stackTrace) => throw LocalDataSourceException(
-          'Cannot save quotes to local storage',
+          'Cannot get quotes from local storage',
           error,
           stackTrace,
         ),
@@ -102,21 +100,25 @@ class SharedPrefs implements LocalDataSource {
 
   @override
   Stream<List<Quote>?> get quotes$ => _prefs
-      .observe<List<Quote>>(
-        kQuotes,
-        (dynamic value) => value == null
-            ? value
-            : (value as List<dynamic>)
-                .map((e) => Quote.fromJson(
-                      jsonDecode(e),
-                    ))
-                .toList(),
+      .getStringListStream(kQuotes)
+      .map(
+        _toListQuote,
       )
       .onErrorReturnWith(
         (error, stackTrace) => throw LocalDataSourceException(
-          'Cannot save quotes to local storage',
+          'Cannot read quotes stream from local storage',
           error,
           stackTrace,
         ),
       );
+
+  List<Quote>? _toListQuote(dynamic value) {
+    return value == null
+        ? null
+        : (value as List<dynamic>)
+            .map((e) => Quote.fromJson(
+                  jsonDecode(e),
+                ))
+            .toList();
+  }
 }

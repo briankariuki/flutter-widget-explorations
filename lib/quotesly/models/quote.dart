@@ -19,6 +19,9 @@ class Quote {
 
   late List<String>? tags;
 
+  @JsonKey(defaultValue: false)
+  late bool bookmarked;
+
   static Quote fromJson(dynamic json) => _$QuoteFromJson(json);
 
   static Quote fromString(String json) => _$QuoteFromJson(jsonDecode(json));

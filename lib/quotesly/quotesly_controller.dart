@@ -11,36 +11,59 @@ import 'quotesly_state.dart';
 class QuoteslyController {
   final Function0<void> fetchQuotes;
   final Function(Quote quote) bookmarkQuote;
+  final Function(int value) setCurrentTab;
 
   final BehaviorSubject<QuoteslyErrorMessage> error$;
 
   final BehaviorSubject<List<Quote>> quotes$;
-  final BehaviorSubject<QuotePage> quotePage$;
+
+  final BehaviorSubject<List<Quote>> bookmarkedQuotes$;
+
   final BehaviorSubject<QuoteslyMessage> message$;
+
+  final BehaviorSubject<int> currentTab$;
 
   final Stream<bool> isFetching$;
 
   QuoteslyController._({
     required this.fetchQuotes,
     required this.error$,
-    required this.quotePage$,
     required this.quotes$,
     required this.isFetching$,
     required this.bookmarkQuote,
     required this.message$,
+    required this.bookmarkedQuotes$,
+    required this.currentTab$,
+    required this.setCurrentTab,
   });
 
   factory QuoteslyController(final QuotesUseCase quotesUseCase) {
     print('QuoteslyController init');
 
     final fetchQuotesController = PublishSubject<void>();
+
     final messageController = BehaviorSubject<QuoteslyMessage>();
+
     final bookmarkQuoteController = PublishSubject<Quote>();
+
     final isFetchingController = BehaviorSubject<bool>.seeded(false);
 
+    final currentTabController = BehaviorSubject<int>.seeded(0);
+
     final quotesController = BehaviorSubject<List<Quote>>();
-    final quotePageController = BehaviorSubject<QuotePage>();
+
     final errorController = BehaviorSubject<QuoteslyErrorMessage>();
+
+    final bookmarkedQuotesController = BehaviorSubject<List<Quote>>();
+
+    quotesUseCase.quotesState$().listen((e) {
+      e.fold(
+        ifLeft: (_) => {},
+        ifRight: (state) => {
+          bookmarkedQuotesController.add(state.quotes!.toList()),
+        },
+      );
+    });
 
     bookmarkQuoteController
         .throttle(
@@ -50,22 +73,30 @@ class QuoteslyController {
       ),
     )
         .listen((quote) {
-      quotesUseCase
-          .bookmarkQuote(quote: quote)
-          .doOnCancel(
-            () => {},
-          )
-          .listen((result) {
+      quotesUseCase.bookmarkQuote(quote: quote).listen((result) {
         result.fold(
           ifRight: (unit) {
-            // var _quotesPage = (unit.data as List)
-            //     .map(
-            //       (e) => Quote.fromJson(e),
-            //     )
-            //     .toList();
+            var _quotes = quotesController.value;
 
-            // quotesController.add(_quotesPage);
-            //We have data
+            var _index = _quotes.indexWhere((e) => e.id == unit.id);
+
+            if (_index != -1) {
+              _quotes[_index] = Quote()
+                ..bookmarked = !quote.bookmarked
+                ..author = unit.author
+                ..content = unit.content
+                ..id = unit.id
+                ..authorSlug = unit.authorSlug
+                ..tags = unit.tags
+                ..length = unit.length;
+
+              quotesController.add(_quotes);
+
+              messageController.add(QuoteslyBookmarkMessage(
+                quote.bookmarked ? 'Quote removed' : 'Quote saved',
+                MessageType.bookmark,
+              ));
+            }
           },
           ifLeft: (appError) => appError.message!,
         );
@@ -85,14 +116,34 @@ class QuoteslyController {
         (result) {
           result.fold(
             ifRight: (unit) {
-              var _quotesPage = (unit.data as List)
+              var _quotes = (unit.data as List)
                   .map(
                     (e) => Quote.fromJson(e),
                   )
                   .toList();
 
-              quotesController.add(_quotesPage);
-              //We have data
+              if (bookmarkedQuotesController.value.isNotEmpty) {
+                for (int i = 0; i < _quotes.length; i++) {
+                  var _quote = _quotes[i];
+
+                  var _bookmarkedQuotes = bookmarkedQuotesController.value;
+
+                  var _index = _bookmarkedQuotes.indexWhere((e) => e == _quote.id);
+
+                  if (_index != -1) {
+                    _quotes[_index] = Quote()
+                      ..bookmarked = true
+                      ..author = _quote.author
+                      ..content = _quote.content
+                      ..id = _quote.id
+                      ..authorSlug = _quote.authorSlug
+                      ..tags = _quote.tags
+                      ..length = _quote.length;
+                  }
+                }
+              }
+
+              quotesController.add(_quotes);
             },
             ifLeft: (appError) => appError.message!,
           );
@@ -105,20 +156,23 @@ class QuoteslyController {
       bookmarkQuote: (Quote quote) => bookmarkQuoteController.add(quote),
       message$: messageController,
       error$: errorController,
-      quotePage$: quotePageController,
       quotes$: quotesController,
       isFetching$: isFetchingController,
+      bookmarkedQuotes$: bookmarkedQuotesController,
+      currentTab$: currentTabController,
+      setCurrentTab: (int value) => currentTabController.add(value),
     );
   }
 
   dispose() {
     error$.drain();
     quotes$.drain();
-    quotePage$.drain();
+    bookmarkedQuotes$.drain();
 
     error$.close();
     quotes$.close();
-    quotePage$.close();
+
+    bookmarkedQuotes$.close();
 
     print('QuoteslyController disposed');
   }

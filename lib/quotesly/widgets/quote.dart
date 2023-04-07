@@ -23,6 +23,15 @@ class QuoteCardWidget extends StatefulWidget {
 }
 
 class _QuoteCardWidgetState extends State<QuoteCardWidget> {
+  late Color color;
+
+  @override
+  void initState() {
+    super.initState();
+
+    color = Colors.primaries[Random().nextInt(Colors.primaries.length)];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +39,7 @@ class _QuoteCardWidgetState extends State<QuoteCardWidget> {
       padding: const EdgeInsets.symmetric(vertical: 24.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24.0),
-        color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+        color: color,
       ),
       child: Material(
         color: Colors.transparent,
@@ -77,8 +86,8 @@ class _QuoteCardWidgetState extends State<QuoteCardWidget> {
                   IconButton(
                     splashRadius: 20.0,
                     onPressed: () => widget.onBookmark(widget.quote),
-                    icon: const Icon(
-                      Icons.bookmark,
+                    icon: Icon(
+                      widget.quote.bookmarked == true ? Icons.bookmark : Icons.bookmark_outline,
                       color: Colors.white,
                     ),
                   ),

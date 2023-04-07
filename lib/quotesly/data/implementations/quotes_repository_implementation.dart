@@ -108,6 +108,9 @@ class QuotesRepositoryImpl implements QuotesRepository {
 
   @override
   Stream<Either<AppError, Quote>> bookmarkQuote({Quote? quote}) {
-    return _localDataSource.saveQuote(quote!).asStream().map((_) => quote).toEitherStream(Mappers.errorToAppError);
+    return (quote?.bookmarked == false ? _localDataSource.saveQuote(quote!) : _localDataSource.removeQuote(quote!))
+        .asStream()
+        .map((_) => quote)
+        .toEitherStream(Mappers.errorToAppError);
   }
 }

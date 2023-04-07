@@ -30,4 +30,6 @@ class QuotesUseCase {
     Quote? quote,
   }) =>
       _quotesRepository.bookmarkQuote(quote: quote);
+
+  Stream<Either<AppError, QuotesState>> quotesState$() => _quotesRepository.quotesState$;
 }
