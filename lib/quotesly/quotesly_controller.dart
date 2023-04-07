@@ -105,7 +105,7 @@ class QuoteslyController {
 
     fetchQuotesController.listen((value) {
       quotesUseCase
-          .getRandomQuotes()
+          .getRandomQuotes(limit: 20)
           .doOnListen(
             () => isFetchingController.add(true),
           )
@@ -165,14 +165,19 @@ class QuoteslyController {
   }
 
   dispose() {
+    //Drain and close streams to prevent memory leaks
     error$.drain();
     quotes$.drain();
     bookmarkedQuotes$.drain();
+    currentTab$.drain();
+    message$.drain();
+    isFetching$.drain();
 
     error$.close();
     quotes$.close();
-
     bookmarkedQuotes$.close();
+    currentTab$.close();
+    message$.close();
 
     print('QuoteslyController disposed');
   }
