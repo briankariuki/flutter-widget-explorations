@@ -49,9 +49,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> with SingleTicker
               controller: scrollController,
               itemCount: 200,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  child: Text('$index'),
-                );
+                return Text('$index');
               },
             ),
           ),

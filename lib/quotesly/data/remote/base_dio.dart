@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import '../../config/env.dart';
-import 'base_response.dart';
 import 'dio_adapter_stub.dart' if (dart.library.io) 'dio_adapter_mobile.dart' if (dart.library.js) 'dio_adapter_web.dart';
 
 _parseAndDecode(String response) {
