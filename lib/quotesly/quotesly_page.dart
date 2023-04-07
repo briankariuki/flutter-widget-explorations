@@ -126,7 +126,7 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                             AnimatedScale(
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.fastOutSlowIn,
-                              scale: snapshot.data == 0 ? 1.0 : 0.97,
+                              scale: snapshot.data == 0 ? 1.0 : 1.1,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
@@ -194,7 +194,7 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                             AnimatedScale(
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.fastOutSlowIn,
-                              scale: snapshot.data == 1 ? 1.0 : 0.97,
+                              scale: snapshot.data == 1 ? 1.0 : 1.1,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
