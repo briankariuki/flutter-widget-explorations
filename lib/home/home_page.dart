@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_programming/assets.dart';
 import 'package:flutter_reactive_programming/core/widgets/widgets.dart';
