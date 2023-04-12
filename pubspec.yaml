@@ -27,6 +27,7 @@ dependencies:
   rx_shared_preferences: ^3.0.0
   rxdart_ext: ^0.2.8
   json_annotation: ^4.4.0
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

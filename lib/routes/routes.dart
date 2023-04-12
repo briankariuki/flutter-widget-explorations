@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_programming/apple_bubble_ui/apple_bubble_ui_page.dart';
 import 'package:flutter_reactive_programming/books_scroll/books_scroll_page.dart';
+import 'package:flutter_reactive_programming/cart/cart_controller.dart';
 import 'package:flutter_reactive_programming/dynamic_tab_indicator/dynamic_tab_indicator_page.dart';
 import 'package:flutter_reactive_programming/fancy_fab/fancy_fab_page.dart';
 import 'package:flutter_reactive_programming/movie_cards/movie_cards_page.dart';
@@ -8,6 +9,9 @@ import 'package:flutter_reactive_programming/open_card/open_card_page.dart';
 import 'package:flutter_reactive_programming/quotesly/quotesly_page.dart';
 import 'package:flutter_reactive_programming/surfshark/surfshark_page.dart';
 import 'package:flutter_reactive_programming/who_to_follow/who_to_follow_widget.dart';
+import 'package:provider/provider.dart';
+
+import '../cart/cart_page.dart';
 
 final routes = <PageRoute>[
   PageRoute(
@@ -60,6 +64,17 @@ final routes = <PageRoute>[
     routeName: QuoteslyPage.routeName,
     title: 'Quotesly',
     widget: const QuoteslyPage(),
+    isUnfinished: false,
+  ),
+
+  PageRoute(
+    routeName: CartPage.routeName,
+    title: 'Cart',
+    widget: Provider(
+      create: (_) => CartController(),
+      dispose: (_, cartController) => cartController.dispose(),
+      child: const CartPage(),
+    ),
     isUnfinished: false,
   ),
 ];
