@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 
+import 'models/models.dart';
+
 @immutable
 abstract class FavoriteStringsMessage {
   String get message;
   MessageType get type;
 }
 
-enum MessageType { error, bookmark, success, none }
+enum MessageType { error, favorite, success, none }
 
 class FavoriteStringsSuccessMessage implements FavoriteStringsMessage {
   @override
@@ -17,13 +19,15 @@ class FavoriteStringsSuccessMessage implements FavoriteStringsMessage {
   const FavoriteStringsSuccessMessage(this.message, this.type);
 }
 
-class FavoriteStringsBookmarkMessage implements FavoriteStringsMessage {
+class FavoriteStringsFavoriteMessage implements FavoriteStringsMessage {
   @override
   final String message;
   @override
   final MessageType type;
 
-  const FavoriteStringsBookmarkMessage(this.message, this.type);
+  final FavoriteString favoriteString;
+
+  const FavoriteStringsFavoriteMessage(this.message, this.type, this.favoriteString);
 }
 
 class FavoriteStringsErrorMessage implements FavoriteStringsMessage {

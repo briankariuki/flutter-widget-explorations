@@ -131,7 +131,7 @@ class QuoteslyController {
                   var _index = _bookmarkedQuotes.indexWhere((e) => e.id == _quote.id);
 
                   if (_index != -1) {
-                    _quotes[_index] = Quote()
+                    _quotes[i] = Quote()
                       ..bookmarked = true
                       ..author = _quote.author
                       ..content = _quote.content

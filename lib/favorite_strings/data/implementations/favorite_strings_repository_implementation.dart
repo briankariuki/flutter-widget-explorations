@@ -9,7 +9,7 @@ import '../exception/local_data_source_exception.dart';
 import '../local/local_data_source.dart';
 
 class FavoriteStringsRepositoryImpl implements FavoriteStringsRepository {
-  static const String tag = '[QUOTES_REPOSITORY]';
+  static const String tag = '[FAVORITE_STRINGS_REPOSITORY]';
 
   final LocalDataSource _localDataSource;
 
