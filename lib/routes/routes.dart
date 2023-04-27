@@ -3,6 +3,7 @@ import 'package:flutter_reactive_programming/apple_bubble_ui/apple_bubble_ui_pag
 import 'package:flutter_reactive_programming/books_scroll/books_scroll_page.dart';
 import 'package:flutter_reactive_programming/cart/cart_controller.dart';
 import 'package:flutter_reactive_programming/dynamic_tab_indicator/dynamic_tab_indicator_page.dart';
+import 'package:flutter_reactive_programming/favorite_strings/favorite_strings_page.dart';
 import 'package:flutter_reactive_programming/fancy_fab/fancy_fab_page.dart';
 import 'package:flutter_reactive_programming/movie_cards/movie_cards_page.dart';
 import 'package:flutter_reactive_programming/open_card/open_card_page.dart';
@@ -75,6 +76,13 @@ final routes = <PageRoute>[
       dispose: (_, cartController) => cartController.dispose(),
       child: const CartPage(),
     ),
+    isUnfinished: false,
+  ),
+
+  PageRoute(
+    routeName: FavoriteStringsPage.routeName,
+    title: 'Favorite Strings',
+    widget: const FavoriteStringsPage(),
     isUnfinished: false,
   ),
 ];

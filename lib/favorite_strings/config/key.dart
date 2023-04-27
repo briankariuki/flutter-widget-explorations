@@ -1,0 +1,1 @@
+const kFavoriteStrings = 'favoriteStrings';
