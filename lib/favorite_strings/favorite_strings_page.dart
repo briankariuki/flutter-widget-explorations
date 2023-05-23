@@ -134,11 +134,11 @@ class _FavoriteStringsPageState extends State<FavoriteStringsPage> with SingleTi
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                                      child: Row(
+                                      child: const Row(
                                         children: [
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: const [
+                                            children: [
                                               HeadlineMedium(
                                                 title: "🤩",
                                                 color: Colors.black,
@@ -211,11 +211,11 @@ class _FavoriteStringsPageState extends State<FavoriteStringsPage> with SingleTi
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                                      child: Row(
+                                      child: const Row(
                                         children: [
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: const [
+                                            children: [
                                               HeadlineMedium(
                                                 title: "💟",
                                                 color: Colors.black,

@@ -132,11 +132,11 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                                 children: [
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                                    child: Row(
+                                    child: const Row(
                                       children: [
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: const [
+                                          children: [
                                             HeadlineMedium(
                                               title: "Quotes",
                                               color: Colors.white,
@@ -200,11 +200,11 @@ class _QuoteslyPageState extends State<QuoteslyPage> with SingleTickerProviderSt
                                 children: [
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                                    child: Row(
+                                    child: const Row(
                                       children: [
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: const [
+                                          children: [
                                             HeadlineMedium(
                                               title: "Bookmarks",
                                               color: Colors.white,

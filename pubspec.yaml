@@ -28,6 +28,7 @@ dependencies:
   rxdart_ext: ^0.2.8
   json_annotation: ^4.4.0
   provider: ^6.0.5
+  touchable: ^1.0.2
 
 dev_dependencies:
   flutter_test:

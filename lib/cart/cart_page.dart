@@ -23,14 +23,14 @@ class _CartPageState extends State<CartPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
+          const Padding(
+            padding: EdgeInsets.symmetric(
               horizontal: 24.0,
               vertical: 16.0,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: const [
+              children: [
                 HeadlineMedium(
                   title: 'Cart',
                   color: Colors.black,
@@ -176,8 +176,8 @@ class CartItemWidget extends StatelessWidget {
                                 )
                               : Container(
                                   padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Row(
-                                    children: const [
+                                  child: const Row(
+                                    children: [
                                       Icon(
                                         Icons.info,
                                         color: Colors.red,

@@ -317,8 +317,8 @@ class _SurfsharkPageState extends State<SurfsharkPage> with TickerProviderStateM
           color: bgDarkGray,
           height: kBottomNavigationBarHeight + 24.0,
           width: double.infinity,
-          child: Row(
-            children: const [
+          child: const Row(
+            children: [
               Expanded(
                 child: BottomNavbarItem(
                   isSelected: true,

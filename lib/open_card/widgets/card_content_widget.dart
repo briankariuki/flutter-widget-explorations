@@ -58,8 +58,8 @@ class CardContentWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Icon(
                       Icons.star_border,
                       color: Colors.white24,
