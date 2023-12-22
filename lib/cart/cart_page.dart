@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_reactive_programming/cart/cart_controller.dart';
-import 'package:flutter_reactive_programming/quotesly/widgets/typography.dart';
-import 'package:flutter_reactive_programming/util/image.dart';
+import 'package:flutter_widget_explorations/cart/cart_controller.dart';
+import 'package:flutter_widget_explorations/quotesly/widgets/typography.dart';
+import 'package:flutter_widget_explorations/util/image.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {

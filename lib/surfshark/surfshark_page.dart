@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_reactive_programming/surfshark/surshark_page_data.dart';
-import 'package:flutter_reactive_programming/util/image.dart';
+import 'package:flutter_widget_explorations/surfshark/surshark_page_data.dart';
+import 'package:flutter_widget_explorations/util/image.dart';
 
 class SurfsharkPage extends StatefulWidget {
   static const String routeName = '/surfshark';

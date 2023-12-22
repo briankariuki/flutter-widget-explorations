@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_reactive_programming/apple_bubble_ui/apple_bubble_ui_data.dart';
+import 'package:flutter_widget_explorations/apple_bubble_ui/apple_bubble_ui_data.dart';
 
 class AppleBubbleUIPage extends StatefulWidget {
   static const String routeName = '/apple-bubble-ui';

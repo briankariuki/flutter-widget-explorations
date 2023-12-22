@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_reactive_programming/movie_cards/movie_cards_page_view.dart';
+import 'package:flutter_widget_explorations/movie_cards/movie_cards_page_view.dart';
 
 import 'movie_cards_data.dart';
 

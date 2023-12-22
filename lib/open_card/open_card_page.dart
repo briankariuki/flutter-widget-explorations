@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_reactive_programming/core/widgets/widgets.dart';
-import 'package:flutter_reactive_programming/open_card/widgets/card_content_widget.dart';
-import 'package:flutter_reactive_programming/util/image.dart';
+import 'package:flutter_widget_explorations/core/widgets/widgets.dart';
+import 'package:flutter_widget_explorations/open_card/widgets/card_content_widget.dart';
+import 'package:flutter_widget_explorations/util/image.dart';
 
 import 'open_card_data.dart';
 

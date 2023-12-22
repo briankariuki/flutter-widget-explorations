@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_reactive_programming/apple_bubble_ui/apple_bubble_ui_page.dart';
-import 'package:flutter_reactive_programming/books_scroll/books_scroll_page.dart';
-import 'package:flutter_reactive_programming/cart/cart_controller.dart';
-import 'package:flutter_reactive_programming/dynamic_tab_indicator/dynamic_tab_indicator_page.dart';
-import 'package:flutter_reactive_programming/favorite_strings/favorite_strings_page.dart';
-import 'package:flutter_reactive_programming/fancy_fab/fancy_fab_page.dart';
-import 'package:flutter_reactive_programming/metaball_shapes/metaball_shapes_page.dart';
-import 'package:flutter_reactive_programming/movie_cards/movie_cards_page.dart';
-import 'package:flutter_reactive_programming/open_card/open_card_page.dart';
-import 'package:flutter_reactive_programming/quotesly/quotesly_page.dart';
-import 'package:flutter_reactive_programming/surfshark/surfshark_page.dart';
-import 'package:flutter_reactive_programming/who_to_follow/who_to_follow_widget.dart';
+import 'package:flutter_widget_explorations/apple_bubble_ui/apple_bubble_ui_page.dart';
+import 'package:flutter_widget_explorations/books_scroll/books_scroll_page.dart';
+import 'package:flutter_widget_explorations/cart/cart_controller.dart';
+import 'package:flutter_widget_explorations/dynamic_tab_indicator/dynamic_tab_indicator_page.dart';
+import 'package:flutter_widget_explorations/fancy_edit_card/fancy_edit_card.dart';
+import 'package:flutter_widget_explorations/favorite_strings/favorite_strings_page.dart';
+import 'package:flutter_widget_explorations/fancy_fab/fancy_fab_page.dart';
+import 'package:flutter_widget_explorations/metaball_shapes/metaball_shapes_page.dart';
+import 'package:flutter_widget_explorations/movie_cards/movie_cards_page.dart';
+import 'package:flutter_widget_explorations/open_card/open_card_page.dart';
+import 'package:flutter_widget_explorations/quotesly/quotesly_page.dart';
+import 'package:flutter_widget_explorations/surfshark/surfshark_page.dart';
+import 'package:flutter_widget_explorations/who_to_follow/who_to_follow_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../cart/cart_page.dart';
@@ -90,6 +91,13 @@ final routes = <PageRoute>[
     routeName: MetaballShapesPage.routeName,
     title: 'Metaball Shapes',
     widget: const MetaballShapesPage(),
+    isUnfinished: false,
+  ),
+
+  PageRoute(
+    routeName: FancyEditCardPage.routeName,
+    title: 'Fancy edit card',
+    widget: const FancyEditCardPage(),
     isUnfinished: false,
   ),
 ];

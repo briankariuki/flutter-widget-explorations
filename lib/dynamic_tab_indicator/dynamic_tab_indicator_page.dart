@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_reactive_programming/dynamic_tab_indicator/dynamic_tab_indicator_data.dart';
-import 'package:flutter_reactive_programming/util/image.dart';
+import 'package:flutter_widget_explorations/dynamic_tab_indicator/dynamic_tab_indicator_data.dart';
+import 'package:flutter_widget_explorations/util/image.dart';
 
 enum ScrollDirection { left, right, none }
 

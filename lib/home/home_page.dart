@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_reactive_programming/assets.dart';
-import 'package:flutter_reactive_programming/core/widgets/widgets.dart';
-import 'package:flutter_reactive_programming/routes/routes.dart';
+import 'package:flutter_widget_explorations/assets.dart';
+import 'package:flutter_widget_explorations/core/widgets/widgets.dart';
+import 'package:flutter_widget_explorations/routes/routes.dart';
 
 class HomePage extends StatelessWidget {
   static const String routeName = '/';

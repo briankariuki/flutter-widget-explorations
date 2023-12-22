@@ -3,8 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_reactive_programming/books_scroll/books_scroll_data.dart';
-import 'package:flutter_reactive_programming/util/image.dart';
+import 'package:flutter_widget_explorations/books_scroll/books_scroll_data.dart';
+import 'package:flutter_widget_explorations/util/image.dart';
 import 'package:intl/intl.dart';
 
 class BooksScrollPage extends StatefulWidget {

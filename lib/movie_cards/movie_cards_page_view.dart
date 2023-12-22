@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_reactive_programming/movie_cards/movie_cards_data.dart';
+import 'package:flutter_widget_explorations/movie_cards/movie_cards_data.dart';
 
 enum DragDirection { left, right, none }
 

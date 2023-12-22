@@ -1,4 +1,4 @@
-import 'package:flutter_reactive_programming/assets.dart';
+import 'package:flutter_widget_explorations/assets.dart';
 
 final List<Movie> movies = [
   Movie(

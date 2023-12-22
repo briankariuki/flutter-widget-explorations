@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_reactive_programming/fancy_fab/fancy_fab_data.dart';
+import 'package:flutter_widget_explorations/fancy_fab/fancy_fab_data.dart';
 
 class FancyFabPage extends StatefulWidget {
   static const String routeName = '/fancy-fab';

@@ -1,4 +1,4 @@
-# flutter_reactive_programming
+# flutter_widget_explorations
 
 A new Flutter project.
 

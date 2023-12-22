@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_reactive_programming/open_card/open_card_data.dart';
+import 'package:flutter_widget_explorations/open_card/open_card_data.dart';
 import 'package:intl/intl.dart';
 
 class CardContentWidget extends StatelessWidget {

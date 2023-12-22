@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_reactive_programming/core/widgets/custom_scroll_behavior.dart';
+import 'package:flutter_widget_explorations/core/widgets/custom_scroll_behavior.dart';
 import 'package:rx_shared_preferences/rx_shared_preferences.dart';
 
 import 'data/implementations/quotes_repository_implementation.dart';
