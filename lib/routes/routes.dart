@@ -3,7 +3,7 @@ import 'package:flutter_widget_explorations/apple_bubble_ui/apple_bubble_ui_page
 import 'package:flutter_widget_explorations/books_scroll/books_scroll_page.dart';
 import 'package:flutter_widget_explorations/cart/cart_controller.dart';
 import 'package:flutter_widget_explorations/dynamic_tab_indicator/dynamic_tab_indicator_page.dart';
-import 'package:flutter_widget_explorations/fancy_edit_card/fancy_edit_card.dart';
+import 'package:flutter_widget_explorations/meal_card/meal_card.dart';
 import 'package:flutter_widget_explorations/favorite_strings/favorite_strings_page.dart';
 import 'package:flutter_widget_explorations/fancy_fab/fancy_fab_page.dart';
 import 'package:flutter_widget_explorations/metaball_shapes/metaball_shapes_page.dart';
@@ -95,9 +95,9 @@ final routes = <PageRoute>[
   ),
 
   PageRoute(
-    routeName: FancyEditCardPage.routeName,
-    title: 'Fancy edit card',
-    widget: const FancyEditCardPage(),
+    routeName: MealCardPage.routeName,
+    title: 'Meal card',
+    widget: const MealCardPage(),
     isUnfinished: false,
   ),
 ];
