@@ -104,7 +104,7 @@ final routes = <PageRoute>[
 
   PageRoute(
     routeName: TextRingsPage.routeName,
-    title: 'Meal card',
+    title: 'Text Rings',
     widget: const TextRingsPage(),
     isUnfinished: false,
   ),
