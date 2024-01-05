@@ -11,6 +11,7 @@ import 'package:flutter_widget_explorations/movie_cards/movie_cards_page.dart';
 import 'package:flutter_widget_explorations/open_card/open_card_page.dart';
 import 'package:flutter_widget_explorations/quotesly/quotesly_page.dart';
 import 'package:flutter_widget_explorations/surfshark/surfshark_page.dart';
+import 'package:flutter_widget_explorations/text_rings/text_rings_page.dart';
 import 'package:flutter_widget_explorations/who_to_follow/who_to_follow_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -98,6 +99,13 @@ final routes = <PageRoute>[
     routeName: MealCardPage.routeName,
     title: 'Meal card',
     widget: const MealCardPage(),
+    isUnfinished: false,
+  ),
+
+  PageRoute(
+    routeName: TextRingsPage.routeName,
+    title: 'Meal card',
+    widget: const TextRingsPage(),
     isUnfinished: false,
   ),
 ];
