@@ -30,7 +30,7 @@ class _TextRingsPageState extends State<TextRingsPage> with SingleTickerProvider
     final durationRandom = SnappingRandom<double>(min: 5.0, max: 20.0, increment: 0.2);
     final delayRandom = SnappingRandom<double>(min: -5.0, max: -1, increment: 0.1);
 
-    for (var i = 0; i < 80; i++) {
+    for (var i = 0; i < 100; i++) {
       rings.add(
         Ring(
             id: i,
